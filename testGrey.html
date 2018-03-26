@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测灰度</title>
+</head>
+<body style="background-color:darkkhaki">
+    <canvas id="canvas" width="20" height="20" style="background-color:white"></canvas>
+</body>
+<script>
+    // var char = "!\"#$%&'()*+,+.-/0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{}|~";
+    var char = "一二三四1234abcdABCD我们都爱中华人名共和国！";
+    var arr = [];
+    // var canvas = document.createElement("canvas");
+    // document.body.appendChild(canvas);
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+    context.fillStyle = "white";
+    context.fillRect(0, 0, 20, 20);
+    for(var i = 0; i < char.length; i++) {
+        context.fillStyle = "white";
+        context.fillRect(0, 0, 20, 20);
+        context.fillStyle = "black";
+        context.fillText(char[i], 10, 13);
+        var imageData = context.getImageData(0, 0, 20, 20);
+        var gray = getGray(imageData);
+        arr.push({ele: char[i], gray: gray});
+        context.clearRect(0, 0, 20, 20);
+    }
+
+    var str = "";
+    for(var i = 0; i < arr.length; i++) {
+        str += arr[i].ele;
+    }
+    str += "\n"
+    console.log(str);
+
+    sort();
+    console.log(arr);
+    distinct();
+
+    str = "";
+    for(var i = 0; i < arr.length; i++) {
+        str += arr[i].ele;
+    }
+    str += "\n"
+    console.log(str);
+
+    str = '';
+    for(var i = 0; i < arr.length; i++) {
+        str += '"' + arr[i].ele + '", ';
+        // str += arr[i].ele;
+    }
+    str += "\n"
+    console.log(str);
+
+    function getGray(imageData) {
+        var data = imageData.data;
+        var gray = 0;
+        for(var i = 0; i < data.length; i += 4) {
+            gray += 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
+        }
+        return gray / 400;
+    }
+
+    function sort() {
+        for(var i = 0; i < arr.length - 1; i++) {
+            for( var j = 1; j < arr.length - i; j++) {
+                if(arr[j].gray < arr[j-1].gray) {
+                    var temp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+
+    function distinct() {
+        for(var i = 1; i < arr.length; i++) {
+            if(arr[i].gray == arr[i-1].gray) {
+                console.log(233);
+                arr.splice(i, 1);
+            }
+        }
+    }
+
+</script>
+</html>
