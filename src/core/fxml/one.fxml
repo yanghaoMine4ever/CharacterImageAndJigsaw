@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="532.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.code.ControllerOne">
+   <top>
+      <HBox prefHeight="64.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightgray;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="chooseBtn" mnemonicParsing="false" onAction="#choosePic" text="添加图片" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="30.0" top="20.0" />
+         </padding>
+      </HBox>
+   </top>
+   <bottom>
+      <HBox prefHeight="66.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: lightgray;" BorderPane.alignment="TOP_LEFT">
+         <children>
+            <Button mnemonicParsing="false" onAction="#toTxts" text="输出到" />
+            <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="文本">
+               <toggleGroup>
+                  <ToggleGroup fx:id="ggg" />
+               </toggleGroup></RadioButton>
+            <RadioButton mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" selected="true" text="html" toggleGroup="$ggg" />
+         </children>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding></HBox>
+   </bottom>
+   <center>
+      <FlowPane fx:id="picView" hgap="10.0" prefHeight="245.0" prefWidth="532.0" vgap="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets top="10.0" />
+         </padding></FlowPane>
+   </center>
+</BorderPane>
